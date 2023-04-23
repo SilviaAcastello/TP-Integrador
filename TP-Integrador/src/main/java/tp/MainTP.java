@@ -16,7 +16,7 @@ public class MainTP {
 		
 		Collection<Partido> partidos = new ArrayList<Partido>();
 		//Leer resultados (archivo en resources)
-		Path pathResultados = Paths.get(args[0]);
+		Path pathResultados = Paths.get("src/test/resources/resultados_test1.csv");
 		List<String> lineasresultados = null;
 		try {
 			lineasresultados = Files.readAllLines(pathResultados);
@@ -43,7 +43,7 @@ public class MainTP {
 		}
 		int puntos = 0;
 		//Leer pronostico (archivo en resources)		
-		Path pathPronostico = Paths.get(args [1]);
+		Path pathPronostico = Paths.get("src/test/resources/pronostico_test1.csv");
 		List<String> lineasPronostico = null;
 		try {
 			lineasPronostico = Files.readAllLines(pathPronostico);

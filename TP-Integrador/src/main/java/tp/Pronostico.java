@@ -1,5 +1,7 @@
 package tp;
 
+import tp.Equipo;
+
 public class Pronostico {
 	private Partido partido;
 	private Equipo equipo;
