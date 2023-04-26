@@ -5,13 +5,25 @@ public class Partido {
 	private Equipo equipo2;
 	private int golesEq1;
 	private int golesEq2;
-	
+	private Ronda Ronda;
 	
 	public Partido(Equipo equipo1, Equipo equipo2) {
 		super();
 		this.equipo1 = equipo1;
 		this.equipo2 = equipo2;
 	}
+	
+	public Partido(Ronda Ronda, Equipo equipo1, Equipo equipo2) {
+		super();
+		this.equipo1 = equipo1;
+		this.equipo2 = equipo2;
+		this.Ronda = Ronda;
+	}
+	
+	//public Partido(String ID_Partido) {
+	//	super();
+	//	this.ID_Partido = ID_Partido;
+	//}
 	
 	public Partido(Equipo equipo1, Equipo equipo2, int golesEq1, int golesEq2) {
 		super();
@@ -44,6 +56,13 @@ public class Partido {
 	}
 	public void setGolesEq2(int golesEq2) {
 		this.golesEq2 = golesEq2;
+	}
+	
+	public Ronda getRonda() {
+		return Ronda;
+	}
+	public void setRonda(Ronda Ronda) {
+		this.Ronda = Ronda;
 	}
 	
 	public EnumResultado resultado(Equipo equipo) {

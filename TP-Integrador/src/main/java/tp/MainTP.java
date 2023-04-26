@@ -6,15 +6,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 
+//import java.sql.*;
+
+
+//import static conexion.sql.conectorSQL.DB_URL;
+//import static conexion.sql.conectorSQL.USER;
+//import static conexion.sql.conectorSQL.PASS;
 
 public class MainTP {
 	
 	public static void main(String[] args) {
 		
-		
+		HashMap<String, Integer> participantes = new HashMap<String, Integer>();
 		Collection<Partido> partidos = new ArrayList<Partido>();
+		//Collection<Participante> participantes = new ArrayList<Participante>();
 		//Leer resultados (archivo en resources)
 		Path pathResultados = Paths.get("src/test/resources/resultados_test1.csv");
 		List<String> lineasresultados = null;
@@ -33,11 +41,14 @@ public class MainTP {
 				primera = false;
 			} else {
 				String[] campos = linearesultado.split(","); //separar la linea (es un String)en elementos de un String[]
-				Equipo equipo1 = new Equipo(campos[0]);
-				Equipo equipo2 = new Equipo(campos[3]);
-				Partido partido = new Partido(equipo1, equipo2);
-				partido.setGolesEq1(Integer.parseInt(campos[1]));
-				partido.setGolesEq2(Integer.parseInt(campos[2]));
+				Ronda ronda = new Ronda(campos[0]);
+				Equipo equipo1 = new Equipo(campos[2]);
+				Equipo equipo2 = new Equipo(campos[5]);
+				//Partido partido = new Partido(campos[0]);
+				Partido partido = new Partido(ronda, equipo1, equipo2);
+				
+				partido.setGolesEq1(Integer.parseInt(campos[3]));
+				partido.setGolesEq2(Integer.parseInt(campos[4]));
 				partidos.add(partido); //guardar cada partido (iteracion del for) en la coleccion
 			}
 		}
@@ -45,6 +56,8 @@ public class MainTP {
 		//Leer pronostico (archivo en resources)		
 		Path pathPronostico = Paths.get("src/test/resources/pronostico_test1.csv");
 		List<String> lineasPronostico = null;
+		//ArrayList<Pronostico> lineasPronostico =lectorSQL.obtenerPronostico();
+		
 		try {
 			lineasPronostico = Files.readAllLines(pathPronostico);
 		} catch (IOException e) {
@@ -60,38 +73,65 @@ public class MainTP {
 				primera = false;
 			} else {
 				String[] campos = lineaPronostico.split(",");
-				Equipo equipo1 = new Equipo(campos[0]);
-				Equipo equipo2 = new Equipo(campos[4]);
+				String[] participante = {campos[7]};
+				Ronda ronda = new Ronda(campos[0]);
+				Equipo equipo1 = new Equipo(campos[2]);
+				Equipo equipo2 = new Equipo(campos[6]);
+				//Participante participante1 = new Participante(campos[7]);
 				Partido partido = null;
 				
+				//System.out.println(ronda.getRonda());
+				//System.out.println(participante.getParticipante());
+				//System.out.println(equipo1.getNombre());
+				//System.out.println(equipo2.getNombre());
+								
 				for(Partido partidoCol: partidos) { //recorrer la coleccion
 					if (partidoCol.getEquipo1().getNombre().equals(equipo1.getNombre()) //comparar los equipos para identificar los partidos
-						&& partidoCol.getEquipo2().getNombre().equals(equipo2.getNombre())){ //incorporar el id partido y ronda para la proxima entrega
+						&& partidoCol.getEquipo2().getNombre().equals(equipo2.getNombre())
+						&& partidoCol.getRonda().getRonda().equals(ronda.getRonda()) ){ //incorporar el id partido y ronda para la proxima entrega
 						partido = partidoCol; 
+												
 					}
 				}
 				
+						
 				Equipo equipo = null;
 				EnumResultado resultado = null;
-				if ("X".equals(campos[1])) {
+				if ("X".equals(campos[3])) {
 					equipo = equipo1;
 					resultado = EnumResultado.GANADOR;
 				}
-				if ("X".equals(campos[2])) {
+				if ("X".equals(campos[4])) {
 					equipo = equipo1;
 					resultado = EnumResultado.EMPATE;
 				}
-				if ("X".equals(campos[3])) {
+				if ("X".equals(campos[5])) {
 					equipo = equipo1;
 					resultado = EnumResultado.PERDEDOR;
-				}
+				}					
+								
 				Pronostico pronostico = new Pronostico(partido,equipo,resultado);
-				puntos += pronostico.puntos();
-				
-			}
+				puntos = pronostico.puntos();
+				participantes.put(campos[7], 0);
+				for (String clave : participante) {
+					
+					if (participantes.containsKey(clave)){
+						participantes.put(clave, participantes.get(clave)+ puntos);
+					}else {
+						participantes.put(clave, puntos);
+					}
+				}
+			}			
 		}
-		System.out.print("los puntos obtenidos por el usuario fueron: ");
-		System.out.println(puntos);
+		
+			
+		for (String clave : participantes.keySet()) {
+		    Integer valor = participantes.get(clave);
+		    System.out.println("Los puntos obtenidos por el participante " + clave + " fueron: " +valor);
+		}
+		
+		
 	}
+
 
 }
