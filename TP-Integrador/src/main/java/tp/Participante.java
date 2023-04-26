@@ -17,20 +17,4 @@ public class Participante {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
-	//public int puntosParticipante() {
-		
-		//if(this.participante.equals(participante)) {
-		//	cont += pronostico.puntos();
-		//	return cont;
-		//}
-	//}
-	//	EnumResultado resultadoReal = this.partido.resultado(this.equipo);
-	//	if(this.resultado.equals(resultadoReal)) {
-	//		return 1;
-	//	}else {
-	//		return 0;
-	//	}
-	//	Pronostico pronostico = new Pronostico(partido,equipo,resultado);
-	//	puntos += pronostico.puntos();
 }

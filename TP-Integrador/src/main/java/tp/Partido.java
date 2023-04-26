@@ -20,11 +20,6 @@ public class Partido {
 		this.Ronda = Ronda;
 	}
 	
-	//public Partido(String ID_Partido) {
-	//	super();
-	//	this.ID_Partido = ID_Partido;
-	//}
-	
 	public Partido(Equipo equipo1, Equipo equipo2, int golesEq1, int golesEq2) {
 		super();
 		this.equipo1 = equipo1;

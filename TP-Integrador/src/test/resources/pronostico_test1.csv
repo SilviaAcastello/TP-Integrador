@@ -1,7 +1,8 @@
 ID-partido,Ronda,Equipo 1,Gana 1,Empata,Gana 2,Equipo 2,Participante
-R1P1,1,Argentina,X,,,Arabia Saudita,Julia
+R1P1,1,Argentina,,,X,Arabia Saudita,Julia
 R1P1,1,Argentina,X,,,Arabia Saudita,Pedro
 R1P1,1,Argentina,X,,,Arabia Saudita,Juan
-R1P2,2,Polonia,X,,,Mexico,Pedro
+R1P2,2,Polonia,,X,,Mexico,Luis
+R1P2,2,Polonia,,X,,Mexico,Pedro
 R1P2,2,Polonia,,X,,Mexico,Juan
 R1P2,2,Polonia,,X,,Mexico,Luis
